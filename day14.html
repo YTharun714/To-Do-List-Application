@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #todo-container {
+            width: 300px;
+            margin: 100px auto;
+        }
+
+        #todo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            border: 2px solid #ccc;
+            padding: 16px;
+            margin-bottom: 16px;
+            background-color: #fff;
+        }
+
+        .todo-item input {
+            margin-right: 8px;
+        }
+
+        .btn {
+            padding: 8px;
+            background-color: #4caf50;
+            color: #c31616;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="todo-container">
+        <h2>To-Do List Application</h2>
+        <ul id="todo-list"></ul>
+        <div>
+            <input type="text" id="new-task" placeholder="New Task">
+            <button class="btn" onclick="addTask()">Add Task</button>
+        </div>
+    </div>
+
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("new-task");
+            var taskText = taskInput.value.trim();
+
+            if (taskText === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            var todoList = document.getElementById("todo-list");
+
+            var listItem = document.createElement("li");
+            listItem.className = "todo-item";
+
+            var checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+
+            var label = document.createElement("label");
+            label.innerText = taskText;
+
+            var deleteButton = document.createElement("button");
+            deleteButton.className = "btn";
+            deleteButton.innerText = "Delete";
+            deleteButton.onclick = function() {
+                todoList.removeChild(listItem);
+            };
+
+            listItem.appendChild(checkbox);
+            listItem.appendChild(label);
+            listItem.appendChild(deleteButton);
+
+            todoList.appendChild(listItem);
+
+            taskInput.value = "";
+        }
+    </script>
+</body>
+</html>
